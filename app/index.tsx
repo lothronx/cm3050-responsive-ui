@@ -1,5 +1,6 @@
 import { Text, View, StyleSheet, LayoutChangeEvent } from "react-native";
 import { useState } from "react";
+import { LinearGradient } from "expo-linear-gradient";
 
 export default function Index() {
   // The noughts and crosses board text
@@ -20,9 +21,9 @@ export default function Index() {
   };
 
   return (
-    <View style={styles.container}>
-      {/* The board is a 3x3 grid of cells. */}
+    <LinearGradient colors={["#f6c6d0", "#e4a7b4", "#b6d0e2"]} style={styles.container}>
       <View style={styles.board}>
+        {/* The board is a 3x3 grid of cells */}
         {noughtsAndCrosses.map((row, i) => (
           <View
             key={i}
@@ -35,16 +36,31 @@ export default function Index() {
               <View
                 key={j}
                 onLayout={onCellLayout}
-                /* Draw inner vertical borders only. Do not draw outer vertical borders. */
-                style={[styles.cell, { borderRightWidth: j < row.length - 1 ? borderWidth : 0 }]}>
-                {/* Dynamically set the font size based on the cell width. */}
-                <Text style={[styles.cellText, { fontSize: fontSize }]}>{cell}</Text>
+                style={[
+                  styles.cell,
+                  {
+                    /* Draw inner vertical borders only. Do not draw outer vertical borders. */
+                    borderRightWidth: j < row.length - 1 ? borderWidth : 0,
+                  },
+                ]}>
+                <Text
+                  style={[
+                    styles.cellText,
+                    {
+                      /* The text size is dynamic based on the cell width */
+                      fontSize: fontSize,
+                      /* X is red, O is blue */
+                      color: cell === "X" ? "salmon" : "lightsteelblue",
+                    },
+                  ]}>
+                  {cell}
+                </Text>
               </View>
             ))}
           </View>
         ))}
       </View>
-    </View>
+    </LinearGradient>
   );
 }
 
@@ -53,28 +69,41 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "white",
   },
   board: {
-    width: "100%",
+    width: "90%",
     aspectRatio: 1, // The board is a square
-    padding: "10%",
+    padding: "5%",
     flexDirection: "column",
+    backgroundColor: "white",
+    borderRadius: 15,
+    shadowColor: "black",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.32,
+    shadowRadius: 5.46,
+    elevation: 9,
   },
   row: {
     flex: 1, // Each row is of equal height
     flexDirection: "row",
+    borderColor: "dimgray",
   },
   cell: {
     flex: 1, // Each cell is of equal width
     // Center the text
     justifyContent: "center",
     alignItems: "center",
+    borderColor: "dimgray",
   },
   cellText: {
-    fontSize: 68, // The fallback font size is 68
-    fontWeight: "bold",
+    fontWeight: "900",
     textAlign: "center",
     textAlignVertical: "center",
+    textShadowColor: "rgba(0, 0, 0, 0.2)",
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 3,
   },
 });
