@@ -1,3 +1,4 @@
+// start of my code
 import { Text, View, StyleSheet, LayoutChangeEvent } from "react-native";
 import { useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
@@ -107,3 +108,4 @@ const styles = StyleSheet.create({
     textShadowRadius: 3,
   },
 });
+//end of my code
