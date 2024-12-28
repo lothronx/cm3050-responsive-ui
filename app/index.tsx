@@ -48,8 +48,8 @@ export default function Index() {
                   style={[
                     styles.cellText,
                     {
-                      /* The text size is dynamic based on the cell width */
-                      fontSize: fontSize,
+                      /* The text size is dynamic based on the cell width with a fallback value of 68 */
+                      fontSize: fontSize || 68,
                       /* X is red, O is blue */
                       color: cell === "X" ? "salmon" : "lightsteelblue",
                     },
